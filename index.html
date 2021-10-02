@@ -1,0 +1,327 @@
+{% extends "layout.html" %}
+
+{% block content %}<style type="text/css">
+select{
+	border-radius: 5px;
+	width: 100px;
+	height: 42px;
+	border: none;
+	font-size: 17px;
+}
+form{
+	padding-top: 136px;
+	padding: 16px 32px;
+  background: #4f4062;
+	margin: 0 18px 12px 0;
+	border: none;
+	outline: 1px solid #eceeef;
+	outline-offset: -1px;
+		    width:330px;
+	border-radius: 5px;
+}
+input{
+width: 100px;
+	height: 42px;
+border-radius: 5px;
+	background: rgb(76, 600, 233);
+	font-size: 17px;
+cursor: pointer;
+background: rgb(181,222,249)
+}
+
+table{
+		  vertical-align: top;
+	  border-spacing: 0;
+  font-size: 19px;
+  border-radius: 5px;
+  margin-top:30px;
+}
+h1{
+  top: -10px;
+  left: 10px;
+		  color: #ffffff;
+	text-align: center;
+	font: 16px/1.6 Arial, Helvetica, Tahoma sans-serif;
+}
+
+th {
+   border: 1px solid #eceeef;
+
+}
+td {
+   border: 1px solid #eceeef;
+   height: 100px;
+   width:164px;
+   position: relative;
+}
+span{
+	font-size: 17px;
+	text-align: center;
+}
+
+p{
+    text-align: center;
+}
+
+.toph1{
+   position: absolute;
+}
+.custom-select
+{
+  display: inline-block;
+  height: calc(1.5em + .75rem + 2px);
+  padding: .375rem 1.75rem .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  vertical-align: middle;
+  background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right .75rem center/8px 10px no-repeat;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  appearance: none;
+}
+.btn-success
+{
+  color: #fff;
+  background-color: #3dc9f0;
+}
+.btn{
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  margin-left: 20px;
+}
+.click1{
+  width: 200px;
+  background: #FFFFFF;
+  border: 1px solid #FFFFFF
+}
+.click2{
+  width: 130px;
+  background: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  margin-left:20px;
+}
+.table-bordered
+{
+  border: 1px solid #dee2e6
+}
+.click:active { background: #FFFFFF; } 
+.click:hover { background:  #FFFFFF;} /* при нажатии */
+input:hover { background: #FFFFFF ;} /* при наведении курсора мышки */
+input:active { background: #4f4062; }  /* при нажатии */
+  
+  
+.container1{
+ padding-right: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+</style>
+
+<div class="container1">
+   <input type="date" class="click1" name="date"  id="date" value="2018-07-22">
+   <input type="button" class="click2" value="Рассчитать" onclick="GetStatus()">
+</div>
+
+<table class="table table-bordered">
+  <tr>
+    <td><h1>Характер</h1><div id="id1"><p> </p></div></td>
+    <td><h1>Здоровье</h1><div id="id4"></div></td>
+    <td><h1>Везение</h1><div id="id7"></div></td>
+  </tr>
+  <tr>
+    <td><h1>Энергия</h1><div id="id2"></div></td>
+    <td><h1>Логика</h1><div id="id5"></div></td>
+    <td><h1>Долг</h1><div id="id8"></div></td>
+  </tr>
+  <tr>
+    <td><h1>Интерес</h1><div id="id3"></div></td>
+    <td><h1>Склонность к труду</h1><div id="id6"></div></td>
+    <td><h1>Память</h1><div id="id9"></div></td>
+  </tr>
+</table>
+ <script>
+    function GetStatus() {
+
+    var date1 = document.getElementById("date").value;
+		var selectday = date1[8] +""+ date1[9];
+    var selectmonth =  date1[5] +""+ date1[6];
+		var selectyear= date1[0] +""+ date1[1] + ""+ date1[2]+ ""+ date1[3]
+
+		if (isNaN(Number(selectday)) || isNaN(Number(selectmonth)) || isNaN(Number(selectyear)) ){
+      alert("Укажите дату");
+    }
+
+    else 
+    {
+    var total="";
+    var totalstring=0;
+    let firstday=0;
+    if(Number(selectday)<10){
+      totalstring=totalstring+Number(selectday);
+      firstday = Number(selectday);
+    } 
+    else {
+      totalstring =Number(selectday[0]) + Number(selectday[1]) ;
+      firstday = Number(selectday[0]);}
+    total = selectday;
+    if(Number(selectmonth)<=9){
+         totalstring=totalstring+Number(selectmonth);} 
+    else {totalstring =totalstring+ Number(selectmonth[0]) + Number(selectmonth[1]);}
+
+    total = total + "" + selectmonth;
+    ;
+    totalstring = totalstring + Number(selectyear[0]) + Number(selectyear[1]) + Number(selectyear[2]) + Number(selectyear[3]);
+    total = total + "" + selectyear;
+
+    var cheslo2=0;
+    if (Number(totalstring)<=9){
+        total = total + "" + totalstring;
+        cheslo2=Number(totalstring);
+    }
+    else {
+      totalstring = totalstring + "";
+      total = total + "" + totalstring;
+      cheslo2=Number(totalstring[0]) + Number (totalstring[1]);
+     
+    }
+   
+
+    total = total +""+cheslo2;
+    var cheslo3= 0;
+    
+    cheslo3 = totalstring - (Number(firstday)*2);
+   
+    if (cheslo3 < 0) {
+      cheslo3=cheslo3 * (-1);
+    }
+
+    total = total +""+String(cheslo3);
+    cheslo_pre4 = cheslo3 + "";
+
+    var cheslo4 = 0
+    if (Number(cheslo_pre4)<10){
+      cheslo4 = Number(cheslo_pre4);
+    }
+    else 
+    {
+      cheslo4 = Number(cheslo_pre4[0]) + Number(cheslo_pre4[1]); 
+    }
+    total = total +""+cheslo4;
+    let item_id1="&nbsp";
+    let item_id2="&nbsp";
+    let item_id3="&nbsp";
+    let item_id4="&nbsp";
+    let item_id5="&nbsp";
+    let item_id6="&nbsp";
+    let item_id7="&nbsp";
+    let item_id8="&nbsp";
+    let item_id9="&nbsp";
+    let i=0;
+    
+     while (i<total.length){
+      switch(total[i]){
+        case '1': 
+          item_id1 = item_id1 + total[i];
+          break;
+        case '2': 
+          item_id2 = item_id2 + total[i];
+          break;
+        case '3': 
+          item_id3 = item_id3 + total[i];
+          break;
+        case '4': 
+          item_id4 = item_id4 + total[i];
+          break;
+        case '5': 
+          item_id5 = item_id5 + total[i];
+          break; 
+        case '6': 
+          item_id6 = item_id6 + total[i];
+          break;    
+        case '7': 
+          item_id7 = item_id7 + total[i];
+          break; 
+        case '8': 
+          item_id8 = item_id8 + total[i];
+          break;   
+        case '9': 
+          item_id9 = item_id9 + total[i];
+          break;   
+        }
+
+        i=i+1;
+      }
+
+    var id1 = document.getElementById("id1");
+    document.getElementById("id1").innerHTML = "";
+    var new_id1 = document.createElement("div");
+    new_id1.className ="item";
+    new_id1.innerHTML = '<p>'+item_id1+'</p>';
+    id1.append(new_id1);
+    
+    var id2 = document.getElementById("id2");
+    document.getElementById("id2").innerHTML = "";
+    var new_id2 = document.createElement("div");
+    new_id2.className ="item";
+    new_id2.innerHTML ='<p>'+item_id2+'</p>';
+    id2.append(new_id2)+'</div>';
+    
+    var id3 = document.getElementById("id3");
+     document.getElementById("id3").innerHTML = "";
+    var new_id3 = document.createElement("div");
+    new_id3.className ="item";
+    new_id3.innerHTML ='<p>'+item_id3+'</p>';
+    id3.append(new_id3);
+    
+    var id4 = document.getElementById("id4");
+    document.getElementById("id4").innerHTML = "";
+    var new_id4 = document.createElement("div");
+    new_id4.className ="item";
+    new_id4.innerHTML ='<p>'+item_id4+'</p>';
+    id4.append(new_id4);
+    
+    var id5 = document.getElementById("id5");
+    document.getElementById("id5").innerHTML = "";
+    var new_id5 = document.createElement("div");
+    new_id5.className ="item";
+    new_id5.innerHTML ='<p>'+item_id5+'</p>';
+    id5.append(new_id5);
+    
+    var id6 = document.getElementById("id6");
+    document.getElementById("id6").innerHTML = "";
+    var new_id6 = document.createElement("div");
+    new_id6.className ="item";
+    new_id6.innerHTML ='<p>'+item_id6+'</p>';
+    id6.append(new_id6);
+    
+    var id7 = document.getElementById("id7");
+    document.getElementById("id7").innerHTML = "";
+    var new_id7 = document.createElement("div");
+    new_id7.className ="item";
+    new_id7.innerHTML ='<p>'+item_id7+'</p>';
+    id7.append(new_id7);
+    
+    var id8 = document.getElementById("id8");
+    document.getElementById("id8").innerHTML = "";
+    var new_id8 = document.createElement("div");
+    new_id8.className ="item";
+    new_id8.innerHTML ='<p>'+item_id8+'</p>';
+    id8.append(new_id8);
+    
+    var id9 = document.getElementById("id9");
+    document.getElementById("id9").innerHTML = "";
+    var new_id9 = document.createElement("div");
+    new_id9.className ="item";
+    new_id9.innerHTML ='<p>'+item_id9+'</p>';
+    id9.append(new_id9);
+    
+   }
+   }
+      
+</script>			
+
+{% endblock %}
